@@ -21,10 +21,22 @@ jobs:
             dist/github-contribution-grid-snake.svg
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
 
+      # 🔥 ADD THIS STEP (creates index.html)
+      - name: Create index.html
+        run: |
+          echo '<!DOCTYPE html>
+          <html>
+          <head><title>Snake Animation</title></head>
+          <body>
+            <h1>My Snake Contributions</h1>
+            <img src="github-contribution-grid-snake.svg" alt="snake animation" />
+          </body>
+          </html>' > dist/index.html
+
       - name: Push to output branch
         uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: output
           build_dir: dist
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
